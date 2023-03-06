@@ -30,8 +30,12 @@ class num2PrimeNum
             return;
         }
         int n = num;
-        for (int i = 2; i < Math.Sqrt(n); i++)
+        for (int i = 2; i < n + 1; i++)
         {
+            if (num == 1)
+            {
+                break;
+            }
             divideHelper(i);
         }
     }
@@ -51,6 +55,7 @@ class num2PrimeNum
         string read = Console.ReadLine();
         int numRead = Int32.Parse(read);
         num2PrimeNum n = new num2PrimeNum(numRead);
+        Console.WriteLine("n是以下这些数的相乘：");
         n.divide();
     }
     
