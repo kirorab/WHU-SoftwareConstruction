@@ -30,7 +30,7 @@ class num2PrimeNum
             return;
         }
         int n = num;
-        for (int i = 2; i < n + 1; i++)
+        for (int i = 2; i < Math.Sqrt(n); i++)
         {
             if (num == 1)
             {
@@ -38,6 +38,7 @@ class num2PrimeNum
             }
             divideHelper(i);
         }
+        divideHelper(num);
     }
 
     private void printPrimeNum(int primeNum, int order)
