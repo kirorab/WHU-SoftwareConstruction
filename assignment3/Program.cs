@@ -49,10 +49,15 @@ namespace shapeCreate
                 {
                     Console.WriteLine("This shape is illegal");
                 }
-
-                areaSum += sh.Getarea();
+                else
+                {
+                    Console.WriteLine("This shape is legal");
+                    areaSum += sh.Getarea();
+                }
+                
             }
 
+            
             Console.WriteLine("The sum of area is " + areaSum);
         }
     }
