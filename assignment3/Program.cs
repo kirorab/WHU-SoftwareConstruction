@@ -9,7 +9,7 @@ namespace shapeCreate
             Random r = new Random();
             int areaSum = 0;
             // 随机创建10个形状对象，计算这些对象的面积之和
-            string s = null;
+            shapeType s = shapeType.emptyShape;
             int[] list = null;
             for (int i = 0; i < 10; i++)
             {
@@ -18,7 +18,7 @@ namespace shapeCreate
                 {
                     case 0:
                         list = new int[3];
-                        s = "triangle";
+                        s = shapeType.rectangle;
                         for (int j = 0; j < list.Length; j++)
                         {
                             list[j] = r.Next(0, 100);
@@ -26,7 +26,7 @@ namespace shapeCreate
                         break;
                     case 1:
                         list = new int[2];
-                        s = "rectangle";
+                        s = shapeType.rectangle;
                         for (int j = 0; j < list.Length; j++)
                         {
                             list[j] = r.Next(0, 100);
@@ -34,7 +34,7 @@ namespace shapeCreate
                         break;
                     case 2:
                         list = new int[1];
-                        s = "square";
+                        s = shapeType.square;
                         for (int j = 0; j < list.Length; j++)
                         {
                             list[j] = r.Next(0, 100);

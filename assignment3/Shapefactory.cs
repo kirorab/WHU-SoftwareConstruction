@@ -24,19 +24,19 @@ namespace shapeCreate
         }
         
         
-        public static Shape Createshape(string shape, params int []list)
+        public static Shape Createshape(shapeType shape, params int []list)
         {
             switch (shape)
             {
-                case "triangle":
+                case shapeType.triangle:
                     if (list.Length != 3)
                     {
                         throw new IOException("The length of array should be 3");
                     }
-
+                    
                     return Createtriangle(list[0], list[1], list[2]);
                 
-                case "rectangle":
+                case shapeType.rectangle:
                     if (list.Length != 2)
                     {
                         throw new IOException("The length of array should be 2");
@@ -44,12 +44,11 @@ namespace shapeCreate
 
                     return createreRectangle(list[0], list[1]);
                 
-                case "square":
+                case shapeType.square:
                     if (list.Length != 1)
                     {
                         throw new IOException("The length of array should be 1");
                     }
-
                     return Createsquare(list[0]);
                 default:
                     throw new IOException("The shape should be 'triangle', 'rectangle' or 'square'");
