@@ -18,7 +18,7 @@ namespace shapeCreate
                 {
                     case 0:
                         list = new int[3];
-                        s = shapeType.rectangle;
+                        s = shapeType.triangle;
                         for (int j = 0; j < list.Length; j++)
                         {
                             list[j] = r.Next(0, 100);
@@ -43,21 +43,18 @@ namespace shapeCreate
                     default:
                         break;
                 }
-
-                Shape sh = Shapefactory.Createshape(s, list);
-                if (!sh.Islegal())
+                
+                try
                 {
-                    Console.WriteLine("This shape is illegal");
-                }
-                else
-                {
-                    Console.WriteLine("This shape is legal");
+                    Shape sh = Shapefactory.Createshape(s, list);
                     areaSum += sh.Getarea();
                 }
-                
-            }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
 
-            
+            }
             Console.WriteLine("The sum of area is " + areaSum);
         }
     }
