@@ -26,6 +26,7 @@ namespace shapeCreate
         
         public static Shape Createshape(shapeType shape, params int []list)
         {
+            Shape s;
             switch (shape)
             {
                 case shapeType.triangle:
@@ -33,26 +34,32 @@ namespace shapeCreate
                     {
                         throw new IOException("The length of array should be 3");
                     }
-                    
-                    return Createtriangle(list[0], list[1], list[2]);
-                
+                    s = Createtriangle(list[0], list[1], list[2]);
+                    break;
                 case shapeType.rectangle:
                     if (list.Length != 2)
                     {
                         throw new IOException("The length of array should be 2");
                     }
-
-                    return createreRectangle(list[0], list[1]);
-                
+                    s = createreRectangle(list[0], list[1]);
+                    break;
                 case shapeType.square:
                     if (list.Length != 1)
                     {
                         throw new IOException("The length of array should be 1");
                     }
-                    return Createsquare(list[0]);
+                    s = Createsquare(list[0]);
+                    break;
                 default:
-                    throw new IOException("The shape should be 'triangle', 'rectangle' or 'square'");
+                    throw new InvalidDataException("The shape should be 'triangle', 'rectangle' or 'square'");
             }
+
+            if (!s.Islegal())
+            {
+                throw new InvalidDataException("The shape created is invalid");
+            }
+
+            return s;
         }
     }
 }
