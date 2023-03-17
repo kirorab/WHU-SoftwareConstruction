@@ -1,4 +1,6 @@
-﻿namespace Linklistaction
+﻿using System;
+
+namespace Linklistaction
 {
     public class GenericList<T>
     {
@@ -16,6 +18,28 @@
             get => head;
         }
 
+        public static void ForEach(GenericList<T> g, Action<Node<T>> action)
+        {
+            if (g.isEmpty())
+            {
+                Console.WriteLine("The list is empty.");
+                return;
+            }
+
+            Node<T> n = g.Head;
+            while (n != null)
+            {
+                action(n);
+                n = n.Next;
+            }
+        }
+        
+        public bool isEmpty()
+        {
+            return head == null;
+        }
+        
+        
         public void Add(T data)
         {
             Node<T> n = new Node<T>(data);
@@ -29,6 +53,6 @@
                 tail = tail.Next;
             }
         }
-
+        
     }
 }
