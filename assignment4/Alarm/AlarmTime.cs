@@ -22,7 +22,8 @@ namespace Alarm
 
         public override string ToString()
         {
-            Console.WriteLine("Hour: {0}, Minute: {1}, Second: {2}", hour, minute, second);
+            return string.Format("{0:D2}:{1:D2}:{2:D2}", hour, minute, second);
         }
+        
     }
 }
