@@ -9,23 +9,27 @@ namespace Alarm
         public event AlarmActionHandle SendAlarmMessage;
         public event AlarmActionHandle SendTickMessage;
 
-        public void Ring()
+        public void Tick()
         {
-            // send tick and alarm every second
             while (true)
             {
-                if (SendAlarmMessage == null)
-                {
-                    throw new NullReferenceException("Don't have any AlarmActionHandle");
-                }
                 if (SendTickMessage == null)
                 {
                     throw new NullReferenceException("Don't have any AlarmActionHandle");
                 }
                 SendTickMessage();
-                SendAlarmMessage();
                 Thread.Sleep(1000);
             }
+        }
+        
+        
+        public void Ring()
+        {
+            if (SendAlarmMessage == null)
+                {
+                    throw new NullReferenceException("Don't have any AlarmActionHandle");
+                }
+            SendAlarmMessage();
         }
     }
 }

@@ -4,19 +4,19 @@ namespace Alarm
 {
     public class AlarmRing
     {
-        void tickHandle()
+        void TickHandle()
         {
             Console.WriteLine("Tick");
         }
-        void alarmHandle()
+        void AlarmHandle()
         {
             Console.WriteLine("Alarm");
         }
         public void Ring()
         {
             Alarm alarm = new Alarm();
-            alarm.SendAlarmMessage += alarmHandle;
-            alarm.SendTickMessage += tickHandle;
+            alarm.SendAlarmMessage += AlarmHandle;
+            alarm.SendTickMessage += TickHandle;
             alarm.Ring();
         }
     }

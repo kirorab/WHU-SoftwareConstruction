@@ -41,6 +41,7 @@
     <ItemGroup>
         <Compile Include="Alarm.cs" />
         <Compile Include="AlarmRing.cs" />
+        <Compile Include="AlarmTime.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
