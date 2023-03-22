@@ -4,17 +4,22 @@ namespace Alarm
 {
     public class AlarmRing
     {
+        Alarm alarm;
+
+        public AlarmRing(Alarm alarm)
+        {
+            this.alarm = alarm;
+        }
         void TickHandle()
         {
-            Console.WriteLine("Tick");
+            Console.WriteLine("Tick" + alarm.getCurrentTime());
         }
         void AlarmHandle()
         {
-            Console.WriteLine("Alarm");
+            Console.WriteLine("ding!ding!ding!");
         }
         public void Ring()
         {
-            Alarm alarm = new Alarm();
             alarm.SendAlarmMessage += AlarmHandle;
             alarm.SendTickMessage += TickHandle;
             alarm.Ring();
