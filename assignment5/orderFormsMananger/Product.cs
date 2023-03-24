@@ -4,6 +4,7 @@
     {
         public int Price { get; set; }
         public string ProductName { get; set; }
+        
         public Product(int price, string productName)
         {
             this.Price = price;
@@ -12,7 +13,7 @@
 
         public override int GetHashCode()
         {
-            return ProductName.GetHashCode() + Price.GetHashCode();
+            return (ProductName.GetHashCode() + Price).GetHashCode();
         }
         
         public override bool Equals(object obj)
@@ -27,6 +28,11 @@
             }
             Product product = (Product) obj;
             return product.ProductName == this.ProductName && product.Price == this.Price;
+        }
+        
+        public override string ToString()
+        {
+            return $"Product: {ProductName}, Price: {Price}";
         }
     }
 }

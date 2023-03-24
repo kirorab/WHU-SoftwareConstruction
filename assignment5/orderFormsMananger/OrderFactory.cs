@@ -2,17 +2,19 @@
 {
     public class OrderFactory
     {
-        private static Customer CreateCustomer(string name)
+        private static Customer CreateCustomer(string name, string location)
         {
-            Customer customer = new Customer();
-            customer.Name = name;
-            return customer;
+            return new Customer(name, location);
         }
         
-        private static OrderDetails CreateOrderDetails(int price, string productName, string customerName)
+        private static Product CreateProduct(int price, string productName)
         {
-            Customer customer = CreateCustomer(customerName);
-            return new OrderDetails(price, productName, customer);
+            return new Product(price, productName);
+        }
+
+        private static OrderDetails CreateOrderDetails(Product product, int quantity)
+        {
+            return new OrderDetails(product, quantity);
         }
         
         
