@@ -13,7 +13,7 @@
         
         public override string ToString()
         {
-            return $"Customer: {Name}, Location: {Location}";
+            return $"Name: {Name}, Location: {Location}";
         }
         
         public override int GetHashCode()

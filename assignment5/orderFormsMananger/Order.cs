@@ -7,7 +7,7 @@ namespace orderFormsMananger
     {
         private static int _orderCount;
         
-        public HashSet<OrderDetails> Details { get; set; } = new HashSet<OrderDetails>();
+        public List<OrderDetails> Details { get; set; } = new List<OrderDetails>();
         public int OrderId { get; }
         public string TimeStamp { get; set; }
         public Customer Customer { get; set; }
@@ -53,19 +53,27 @@ namespace orderFormsMananger
         public void AddOneProduct(Product product)
         {
             var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
-            if (Details.Contains(orderDetails))
+            Details.ForEach((details =>
             {
-                orderDetails.AddOne();
-            }
+                if (details.Equals(orderDetails) )
+                {
+                    details.AddOne();
+                    return;
+                }
+            }));
         }
         
         public void RemoveOneProduct(Product product)
         {
             var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
-            if (Details.Contains(orderDetails))
+            Details.ForEach((details =>
             {
-                orderDetails.RemoveOne();
-            }
+                if (details.Equals(orderDetails) )
+                {
+                    details.RemoveOne();
+                    return;
+                }
+            }));
         }
         
         public override int GetHashCode()
@@ -91,7 +99,9 @@ namespace orderFormsMananger
 
         public override string ToString()
         {
-            return $"Order ID: {OrderId}, TimeStamp: {TimeStamp}, Customer: {Customer}, Details: {Details}";
+            string details = "";
+            Details.ForEach((detail) => details += detail.ToString() + ", ");
+            return $"Order ID: {OrderId} TimeStamp: {TimeStamp} Customer: {Customer} Details: {details}" + $"Total Price: {GetTotalPrice()}";
         }
     }
 }

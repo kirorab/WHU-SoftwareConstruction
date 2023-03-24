@@ -9,7 +9,7 @@ namespace orderFormsMananger
             return new Customer(name, location);
         }
         
-        public static Product CreateProduct(int price, string productName)
+        public static Product CreateProduct(string productName, int price)
         {
             return new Product(price, productName);
         }

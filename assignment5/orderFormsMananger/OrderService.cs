@@ -6,7 +6,7 @@ namespace orderFormsMananger
 {
     public class OrderService
     {
-        private List<Order> Orders = new List<Order>();
+        public List<Order> Orders { get; } = new List<Order>();
 
         public OrderService() {} 
         

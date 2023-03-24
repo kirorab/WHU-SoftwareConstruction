@@ -48,7 +48,7 @@ namespace orderFormsMananger
         
         public override string ToString()
         {
-            return $"Product: {Product}, Quantity: {Quantity}";
+            return $"{Product} Quantity: {Quantity}";
         }
         
         public void AddOne()
@@ -58,7 +58,7 @@ namespace orderFormsMananger
         
         public void RemoveOne()
         {
-            if (Quantity > 0)
+            if (Quantity > 1)
             {
                 Quantity--;
             }
