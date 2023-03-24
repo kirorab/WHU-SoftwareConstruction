@@ -2,12 +2,31 @@
 {
     public class Product
     {
-        public int price { get; set; }
-        public string productName { get; set; }
+        public int Price { get; set; }
+        public string ProductName { get; set; }
         public Product(int price, string productName)
         {
-            this.price = price;
-            this.productName = productName;
+            this.Price = price;
+            this.ProductName = productName;
+        }
+
+        public override int GetHashCode()
+        {
+            return ProductName.GetHashCode() + Price.GetHashCode();
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+            Product product = (Product) obj;
+            return product.ProductName == this.ProductName && product.Price == this.Price;
         }
     }
 }
