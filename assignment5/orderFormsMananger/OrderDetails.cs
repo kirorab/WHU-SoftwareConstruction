@@ -1,30 +1,72 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace orderFormsMananger
 {
     public class OrderDetails
     {
-        private List<Product> Products;
-        public Customer Customer { get; set; }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
         
-        public OrderDetails() { }
-        
-        public void AddProduct(Product product)
+        private bool IsValid()
         {
-            Products.Add(product);
+            return Product != null && Quantity > 0;
         }
         
-        public void RemoveProduct(Product product)
+        public OrderDetails(Product product, int quantity)
         {
-            Products.Remove(product);
+            if (quantity <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(quantity), quantity, "Quantity must be greater than zero.");
+            }
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Product cannot be null.");
+            }
+            Product = product;
+            Quantity = quantity;
+        }
+        
+        public override int GetHashCode()
+        {
+            return (Product.GetHashCode() + Quantity).GetHashCode();
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+            OrderDetails orderDetails = (OrderDetails) obj;
+            return orderDetails.Product == this.Product;
+        }
+        
+        public override string ToString()
+        {
+            return $"Product: {Product}, Quantity: {Quantity}";
+        }
+        
+        public void AddOne()
+        {
+            Quantity++;
+        }
+        
+        public void RemoveOne()
+        {
+            if (Quantity > 0)
+            {
+                Quantity--;
+            }
         }
         
         public int GetTotalPrice()
         {
-            int totalPrice = 0;
-            Products.ForEach(product => totalPrice += product.Price);
-            return totalPrice;
+            return Product.Price * Quantity;
         }
-        
     }
 }
