@@ -4,17 +4,17 @@ namespace orderFormsMananger
 {
     public class OrderFactory
     {
-        private static Customer CreateCustomer(string name, string location)
+        public static Customer CreateCustomer(string name, string location)
         {
             return new Customer(name, location);
         }
         
-        private static Product CreateProduct(int price, string productName)
+        public static Product CreateProduct(int price, string productName)
         {
             return new Product(price, productName);
         }
 
-        private static OrderDetails CreateOrderDetails(Product product, int quantity)
+        public static OrderDetails CreateOrderDetails(Product product, int quantity)
         {
             return new OrderDetails(product, quantity);
         }
@@ -33,6 +33,18 @@ namespace orderFormsMananger
             order.Customer = customer;
             order.AddOrderDetails(firstDetails);
             return order;
+        }
+
+        public static Order CreateOrder(Order order)
+        {
+            if (order == null)
+            {
+                throw new ArgumentNullException(nameof(order), "Order cannot be null.");
+            }
+            var newOrder = new Order();
+            newOrder.Customer = order.Customer;
+            newOrder.Details = order.Details;
+            return newOrder;
         }
     }
 }

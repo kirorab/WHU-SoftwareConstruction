@@ -65,5 +65,21 @@ namespace orderFormsMananger
         {
             return Orders.Where(order => order.GetTotalPrice() == totalPrice).OrderBy(order => order.OrderId).ToList();
         }
+        
+        public void ChangeOrderCustomer(Order order, Customer customer)
+        {
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer), "Customer cannot be null.");
+            }
+            if (!Orders.Contains(order))
+            {
+                throw new ArgumentException("Order does not exist.");
+            }
+            var newOrder = OrderFactory.CreateOrder(order);
+            newOrder.Customer = customer;
+            Orders.Remove(order);
+            Orders.Add(newOrder);
+        }
     }
 }

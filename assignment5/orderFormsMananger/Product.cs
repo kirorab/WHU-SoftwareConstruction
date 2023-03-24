@@ -26,7 +26,7 @@
             {
                 return false;
             }
-            Product product = (Product) obj;
+            var product = (Product) obj;
             return product.ProductName == this.ProductName && product.Price == this.Price;
         }
         

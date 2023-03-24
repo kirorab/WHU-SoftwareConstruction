@@ -7,7 +7,7 @@ namespace orderFormsMananger
     {
         private static int _orderCount;
         
-        public HashSet<OrderDetails> Details { get; } = new HashSet<OrderDetails>();
+        public HashSet<OrderDetails> Details { get; set; } = new HashSet<OrderDetails>();
         public int OrderId { get; }
         public string TimeStamp { get; set; }
         public Customer Customer { get; set; }
@@ -48,6 +48,24 @@ namespace orderFormsMananger
                 }
             }
             return totalPrice;
+        }
+        
+        public void AddOneProduct(Product product)
+        {
+            var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
+            if (Details.Contains(orderDetails))
+            {
+                orderDetails.AddOne();
+            }
+        }
+        
+        public void RemoveOneProduct(Product product)
+        {
+            var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
+            if (Details.Contains(orderDetails))
+            {
+                orderDetails.RemoveOne();
+            }
         }
         
         public override int GetHashCode()
