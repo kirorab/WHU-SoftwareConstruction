@@ -29,7 +29,7 @@ namespace orderFormsMananger
         
         public override int GetHashCode()
         {
-            return (Product.GetHashCode() + Quantity).GetHashCode();
+            return Product.GetHashCode();
         }
         
         public override bool Equals(object obj)

@@ -1,4 +1,6 @@
-﻿namespace orderFormsMananger
+﻿using System;
+
+namespace orderFormsMananger
 {
     public class OrderFactory
     {
@@ -17,10 +19,20 @@
             return new OrderDetails(product, quantity);
         }
         
-        
-        public static Order CreateOrder()
+        /* 接受一个Customer对象，一个Product对象，一个数量，用product和quantity
+            创建一个OrderDetails对象，将传入的Customer作为所创建Order的customer，
+            创建的OrderDetails作为该Order的第一个Detail */
+        public static Order CreateOrder(Customer customer, Product product, int quantity)
         {
-            return new Order();
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer), "Customer cannot be null.");
+            }
+            var firstDetails = CreateOrderDetails(product, quantity);
+            Order order = new Order();
+            order.Customer = customer;
+            order.AddOrderDetails(firstDetails);
+            return order;
         }
     }
 }

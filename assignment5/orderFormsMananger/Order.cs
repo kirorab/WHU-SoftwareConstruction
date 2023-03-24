@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace orderFormsMananger
 {
     public class Order
     {
-        private HashSet<OrderDetails> Details;
-        public int OrderId { get; }
         private static int _orderCount;
+        
+        public HashSet<OrderDetails> Details { get; } = new HashSet<OrderDetails>();
+        public int OrderId { get; }
         public string TimeStamp { get; set; }
         public Customer Customer { get; set; }
 
@@ -19,6 +21,11 @@ namespace orderFormsMananger
 
         public void AddOrderDetails(OrderDetails orderDetails)
         {
+            if (Details.Contains(orderDetails))
+            {
+                Console.WriteLine("Could not add existing order details.");
+                return;    
+            }
             Details.Add(orderDetails);
         }
 
