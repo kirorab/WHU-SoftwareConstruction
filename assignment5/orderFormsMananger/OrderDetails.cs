@@ -1,9 +1,30 @@
-﻿namespace orderFormsMananger
+﻿using System.Collections.Generic;
+
+namespace orderFormsMananger
 {
     public class OrderDetails
     {
-        public int Price { get; set; }
-        public string ProductName { get; set; }
+        private List<Product> Products;
         public Customer Customer { get; set; }
+        
+        public OrderDetails() { }
+        
+        public void AddProduct(Product product)
+        {
+            Products.Add(product);
+        }
+        
+        public void RemoveProduct(Product product)
+        {
+            Products.Remove(product);
+        }
+        
+        public int GetTotalPrice()
+        {
+            int totalPrice = 0;
+            Products.ForEach(product => totalPrice += product.Price);
+            return totalPrice;
+        }
+        
     }
 }
