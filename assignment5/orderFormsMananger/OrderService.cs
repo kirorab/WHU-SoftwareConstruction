@@ -76,7 +76,7 @@ namespace orderFormsMananger
             {
                 throw new ArgumentException("Order does not exist.");
             }
-            var newOrder = OrderFactory.CreateOrder(order);
+            var newOrder = OrderUtils.CreateOrder(order);
             newOrder.Customer = customer;
             Orders.Remove(order);
             Orders.Add(newOrder);

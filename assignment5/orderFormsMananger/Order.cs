@@ -52,7 +52,7 @@ namespace orderFormsMananger
         
         public void AddOneProduct(Product product)
         {
-            var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
+            var orderDetails = OrderUtils.CreateOrderDetails(product, 1);
             Details.ForEach((details =>
             {
                 if (details.Equals(orderDetails) )
@@ -65,7 +65,7 @@ namespace orderFormsMananger
         
         public void RemoveOneProduct(Product product)
         {
-            var orderDetails = OrderFactory.CreateOrderDetails(product, 1);
+            var orderDetails = OrderUtils.CreateOrderDetails(product, 1);
             Details.ForEach((details =>
             {
                 if (details.Equals(orderDetails) )

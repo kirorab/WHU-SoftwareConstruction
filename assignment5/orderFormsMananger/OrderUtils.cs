@@ -2,7 +2,7 @@
 
 namespace orderFormsMananger
 {
-    public class OrderFactory
+    public class OrderUtils
     {
         public static Customer CreateCustomer(string name, string location)
         {

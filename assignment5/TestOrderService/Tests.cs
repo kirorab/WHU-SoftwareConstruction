@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using orderFormsMananger;
-using static orderFormsMananger.OrderFactory;
+using static orderFormsMananger.OrderUtils;
 
 namespace TestOrderService
 {
@@ -93,7 +93,7 @@ namespace TestOrderService
         {
             var str = _order1.ToString();
             Console.WriteLine(_order1);
-            
+            Assert.True(true);
         }
         
         [Test]

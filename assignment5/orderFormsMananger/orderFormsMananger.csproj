@@ -42,7 +42,7 @@
         <Compile Include="Customer.cs" />
         <Compile Include="Order.cs" />
         <Compile Include="OrderDetails.cs" />
-        <Compile Include="OrderFactory.cs" />
+        <Compile Include="OrderUtils.cs" />
         <Compile Include="OrderService.cs" />
         <Compile Include="Product.cs" />
         <Compile Include="Program.cs" />
