@@ -13,9 +13,13 @@ namespace Crawler
 
     public class Crawler
     {
+        private const int MaxCount = 100;  
         private Hashtable urls = new Hashtable();
         private int count = 0;
-
+        string webRef = @"^https?://.*\.(?:htm|html|aspx|php|jsp)$";
+        string relativeRef = @"^/.*$";
+        private string limit = @"https?://www.cnblogs.com/dstang2000/.*";
+        
         static void Main(string[] args)
         {
 
@@ -38,18 +42,29 @@ namespace Crawler
                 string current = null;
                 foreach (string url in urls.Keys)
                 {
-                    if ((bool)urls[url]) continue;
+                    if ((bool)urls[url])
+                    {
+                        continue;
+                    }
+
+                    if (!Regex.IsMatch(url, limit))
+                    {
+                        continue;
+                    }
                     current = url;
                 }
-
-                if (current == null || (count > 10)) break;
+                
+                if (current == null || (count > MaxCount)) break;
                 //找到一个还没有下栽过的链接
                 //已经下栽过的， 不再下载
                 Console.WriteLine("爬行于" + current + " 页面！");
                 string html = DownLoad(current); //下栽
                 urls[current] = true;
                 count++;
-                Parse(html); //解析， 并加入新的链接
+                if (Regex.IsMatch(current, webRef) || count == 1)
+                {
+                    Parse(html);
+                }
             }
 
             Console.WriteLine("爬行结束");
@@ -77,12 +92,17 @@ namespace Crawler
         public void Parse(string html)
         {
             {
-                String strRef = @"(href|HREF)[]* =[]*[""'][^""'#>]+[""']";
+                String strRef = @"(href|HREF)[ ]*=[ ]*[""']([^""'#>]+)[""']";
                 MatchCollection matches = new Regex(strRef).Matches(html);
+
                 foreach (Match match in matches)
                 {
                     strRef = match.Value.Substring(match.Value.IndexOf('=') + 1).Trim
-                        ('"', '\'','#',' ','>');
+                        ('"', '\'', '#', ' ', '>', '"');
+                    if (Regex.IsMatch(strRef, relativeRef))
+                                    {
+                                        strRef = "http://www.cnblogs.com" + strRef;
+                                    }
                     if (strRef.Length == 0) continue;
                     if (urls[strRef] == null) urls[strRef] = false;
                 }
