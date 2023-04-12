@@ -17,15 +17,13 @@ namespace Crawler
         private Hashtable urls = new Hashtable();
         private int count = 0;
         string webRef = @"^https?://.*\.(?:htm|html|aspx|php|jsp)$";
-        string relativeRef = @"^/.*$";
-        private string limit = @"https?://www.cnblogs.com/dstang2000/.*";
+        private string limit = @".*(://www.cnblogs.com/dstang2000).*";
+        static string startUrl = "http://www.cnblogs.com/dstang2000/";
         
         static void Main(string[] args)
         {
 
             Crawler myCrawler = new Crawler();
-
-            string startUrl = "http://www.cnblogs.com/dstang2000/";
             if (args.Length >= 1) startUrl = args[0];
             myCrawler.urls.Add(startUrl, false);
             new Thread(myCrawler.Crawl).Start();
@@ -63,7 +61,7 @@ namespace Crawler
                 count++;
                 if (Regex.IsMatch(current, webRef) || count == 1)
                 {
-                    Parse(html);
+                    Parse(html, current);
                 }
             }
 
@@ -89,7 +87,47 @@ namespace Crawler
 
         }
 
-        public void Parse(string html)
+        private string ParseRelativeLink(string url, string relative)
+        {
+            string root = new Uri(url).GetLeftPart(UriPartial.Authority);
+            string protocol = new Uri(url).Scheme;
+            if (Regex.IsMatch(relative, @"^.*://.*"))
+            {
+                return relative;
+            }
+            if (Regex.IsMatch(relative, @"^//"))
+            {
+                return protocol + relative;
+            }
+            if (Regex.IsMatch(relative, @"^/"))
+            {
+                return root + relative;
+            }
+            if (Regex.IsMatch(relative, @"^./"))
+            {
+                return url + relative.Substring(1);
+            }
+            if (Regex.IsMatch(relative, @"^[a-zA-Z0-9]+"))
+            {
+                if (url.EndsWith("/"))
+                {
+                    return url + relative;
+                }
+                return url + '/' + relative;
+            }
+            if (Regex.IsMatch(relative, @"^../"))
+            {
+                int index = url.LastIndexOf('/');
+                if (index > 7)
+                {
+                    return ParseRelativeLink(url.Substring(0, index), relative.Substring(3));
+                }
+            }
+            return relative;
+        }
+        
+        
+        public void Parse(string html, string url)
         {
             {
                 String strRef = @"(href|HREF)[ ]*=[ ]*[""']([^""'#>]+)[""']";
@@ -99,10 +137,7 @@ namespace Crawler
                 {
                     strRef = match.Value.Substring(match.Value.IndexOf('=') + 1).Trim
                         ('"', '\'', '#', ' ', '>', '"');
-                    if (Regex.IsMatch(strRef, relativeRef))
-                                    {
-                                        strRef = "http://www.cnblogs.com" + strRef;
-                                    }
+                    strRef = ParseRelativeLink(url, strRef);
                     if (strRef.Length == 0) continue;
                     if (urls[strRef] == null) urls[strRef] = false;
                 }
