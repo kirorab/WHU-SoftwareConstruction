@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Linq;
 using OrderFormsDataBase.order;
 
 namespace OrderFormsDataBase
@@ -35,6 +37,39 @@ namespace OrderFormsDataBase
                 context.SaveChanges();
                 newOrderId++;
                 newCustomerId++;
+            }
+
+            using (var context = new OrderSeviceContext())
+            {
+                var customer2 = new Customer()
+                {
+                    Id = newCustomerId,
+                    Name = "Customer2"
+                };
+                context.Customers.Add(customer2);
+                context.SaveChanges();
+            }
+
+            using (var context = new OrderSeviceContext())
+            {
+                var orderdetail2 = new OrderDetail()
+                {
+                    Goods = new Goods()
+                    {
+                        Name = "banana",
+                        Price = 3.5f
+                    },
+                    Quantity = 20,
+                    OrderId = newOrderId
+                };
+                context.Entry(orderdetail2).State = EntityState.Added;
+                context.SaveChanges();
+            }
+
+            using (var context = new OrderSeviceContext())
+            {
+                var order = context.Orders.FirstOrDefault(o => o.Id == newOrderId);
+                Console.WriteLine(order);
             }
         }
     }

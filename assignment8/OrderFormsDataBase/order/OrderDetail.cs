@@ -17,6 +17,8 @@ namespace OrderFormsDataBase.order {
 
     public Order Order { get; set; }
     
+    public int OrderId { get; set; }
+    
     public OrderDetail() {}
 
     public OrderDetail(Goods goods, int quantity) {
