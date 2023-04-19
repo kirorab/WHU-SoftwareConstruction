@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OrderApp {
+﻿namespace OrderFormsDataBase.order {
 
   public class Customer {
 
