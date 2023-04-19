@@ -94,34 +94,63 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="orderFormsMananger\Customer.cs" />
-        <Compile Include="orderFormsMananger\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-        <Compile Include="orderFormsMananger\Order.cs" />
-        <Compile Include="orderFormsMananger\OrderDetails.cs" />
-        <Compile Include="orderFormsMananger\OrderService.cs" />
-        <Compile Include="orderFormsMananger\OrderUtils.cs" />
-        <Compile Include="orderFormsMananger\Product.cs" />
-        <Compile Include="orderFormsMananger\Properties\AssemblyInfo.cs" />
+        <Compile Include="OrderSeviceContext.cs" />
+        <Compile Include="order\Customer.cs" />
+        <Compile Include="order\Goods.cs" />
+        <Compile Include="order\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+        <Compile Include="order\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+        <Compile Include="order\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+        <Compile Include="order\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+        <Compile Include="order\obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+        <Compile Include="order\obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+        <Compile Include="order\obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+        <Compile Include="order\Order.cs" />
+        <Compile Include="order\OrderDetail.cs" />
+        <Compile Include="order\OrderService.cs" />
+        <Compile Include="order\Properties\AssemblyInfo.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
+      <None Include="order\App.config" />
+      <None Include="order\bin\Debug\OrderApp.exe.config" />
+      <None Include="order\bin\Debug\OrderSerialize.exe.config" />
+      <None Include="order\bin\Release\OrderApp.exe.config" />
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="orderFormsMananger\bin\Debug\orderFormsMananger.exe" />
-      <Content Include="orderFormsMananger\bin\Debug\orderFormsMananger.pdb" />
-      <Content Include="orderFormsMananger\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.csproj.AssemblyReference.cache" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.csproj.CoreCompileInputs.cache" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.csproj.FileListAbsolute.txt" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.csproj.SuggestedBindingRedirects.cache" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.exe" />
-      <Content Include="orderFormsMananger\obj\Debug\orderFormsMananger.pdb" />
+      <Content Include="order\bin\Debug\OrderApp.exe" />
+      <Content Include="order\bin\Debug\OrderApp.pdb" />
+      <Content Include="order\bin\Debug\orders.xml" />
+      <Content Include="order\bin\Debug\OrderSerialize.exe" />
+      <Content Include="order\bin\Debug\OrderSerialize.pdb" />
+      <Content Include="order\bin\Release\OrderApp.exe" />
+      <Content Include="order\bin\Release\OrderApp.pdb" />
+      <Content Include="order\obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+      <Content Include="order\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+      <Content Include="order\obj\Debug\OrderApp.csproj.AssemblyReference.cache" />
+      <Content Include="order\obj\Debug\OrderApp.csproj.CoreCompileInputs.cache" />
+      <Content Include="order\obj\Debug\OrderApp.csproj.FileListAbsolute.txt" />
+      <Content Include="order\obj\Debug\OrderApp.csproj.SuggestedBindingRedirects.cache" />
+      <Content Include="order\obj\Debug\OrderApp.csprojAssemblyReference.cache" />
+      <Content Include="order\obj\Debug\OrderApp.exe" />
+      <Content Include="order\obj\Debug\OrderApp.pdb" />
+      <Content Include="order\obj\Debug\OrderSerialize.csproj.CoreCompileInputs.cache" />
+      <Content Include="order\obj\Debug\OrderSerialize.csproj.FileListAbsolute.txt" />
+      <Content Include="order\obj\Debug\OrderSerialize.csprojAssemblyReference.cache" />
+      <Content Include="order\obj\Debug\OrderSerialize.exe" />
+      <Content Include="order\obj\Debug\OrderSerialize.pdb" />
+      <Content Include="order\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+      <Content Include="order\obj\Release\OrderApp.csproj.CoreCompileInputs.cache" />
+      <Content Include="order\obj\Release\OrderApp.csproj.FileListAbsolute.txt" />
+      <Content Include="order\obj\Release\OrderApp.csprojAssemblyReference.cache" />
+      <Content Include="order\obj\Release\OrderApp.exe" />
+      <Content Include="order\obj\Release\OrderApp.pdb" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="orderFormsMananger\obj\Debug\TempPE" />
+      <Folder Include="order\obj\Debug\TempPE" />
+      <Folder Include="order\obj\Release\TempPE" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
