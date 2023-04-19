@@ -18,7 +18,7 @@ namespace OrderFormsDataBase.order {
         price = value;
       }
     }
-
+    
     public Goods() { }
 
     public Goods(int id, string name, float price) {

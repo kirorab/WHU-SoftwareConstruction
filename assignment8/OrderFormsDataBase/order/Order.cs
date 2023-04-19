@@ -9,14 +9,16 @@ namespace OrderFormsDataBase.order {
      **/
     public class Order : IComparable<Order> {
 
-        private readonly List<OrderDetail> details = new List<OrderDetail>();
+        public List<OrderDetail> details { get; set; } = new List<OrderDetail>();
 
         public int Id { get; set; }
 
         public Customer Customer { get; set; }
 
         public DateTime CreateTime { get; set; }
-
+        
+        public OrderService OrderService { get; set; }
+        
         public float TotalPrice {
             get => Details.Sum(d => d.TotalPrice);
         }

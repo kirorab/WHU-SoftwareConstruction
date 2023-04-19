@@ -6,8 +6,8 @@ namespace OrderFormsDataBase.order {
 
     public class OrderService {
 
-
-        private readonly List<Order> orders = new List<Order>();
+        public int OrderServiceId { get; set; }
+        public List<Order> orders { get; set; } = new List<Order>();
 
         public OrderService() {
         }

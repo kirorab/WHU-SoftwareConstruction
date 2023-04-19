@@ -5,6 +5,7 @@ namespace OrderFormsDataBase.order {
   /**
    **/
   public class OrderDetail {
+    public int Id { get; set; }
 
     public Goods Goods { get; set; }
 
@@ -14,6 +15,8 @@ namespace OrderFormsDataBase.order {
       get => Goods.Price * Quantity;
     }
 
+    public Order Order { get; set; }
+    
     public OrderDetail() {}
 
     public OrderDetail(Goods goods, int quantity) {
