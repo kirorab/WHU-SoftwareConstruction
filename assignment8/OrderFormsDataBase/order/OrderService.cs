@@ -7,47 +7,71 @@ namespace OrderFormsDataBase.order {
     public class OrderService {
 
         public int OrderServiceId { get; set; }
-        public List<Order> orders { get; set; } = new List<Order>();
 
         public OrderService() {
         }
 
+        private static Order FixOrder(Order order) {
+            if (order == null)
+            {
+                throw new ApplicationException("order is null!");
+            }
+            order.CustomerId = order.Customer.Id;
+            order.Customer = null;
+            return order;
+        }
+        
         //添加订单
         public void AddOrder(Order order) {
-            if (orders.Contains(order)) {
-                throw new ApplicationException($"the order {order.Id} already exists!");
+            using (var db = new OrderSeviceContext())
+            {
+                if (db.Orders.Count() == 0)
+                {
+                    order.Id = 1;
+                }
+                else
+                {
+                    order.Id = db.Orders.Max(o => o.Id) + 1;
+                }
+                db.Orders.Add(FixOrder(order));
+                db.SaveChanges();
             }
-            orders.Add(order);
         }
 
         //更新订单
         public void Update(Order order) {
-            int idx = orders.FindIndex(o => o.Id == order.Id);
-            if (idx < 0) {
-                throw new ApplicationException($"the order {order.Id} doesn't exist!");
+            using (var db = new OrderSeviceContext())
+            {
+                db.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
-            orders.RemoveAt(idx);
-            orders.Add(order);
+            
         }
 
         //根据Id查询订单
         public Order GetById(int orderId) {
-            return orders.FirstOrDefault(o => o.Id == orderId);
+            using (var db = new OrderSeviceContext())
+            {
+                return db.Orders.Where(o => o.Id == orderId).FirstOrDefault();
+            }
         }
 
         //根据Id删除订单
         public void RemoveOrder(int orderId) {
-            int idx=orders.FindIndex(o => o.Id == orderId);
-            if (idx >= 0) {
-                orders.RemoveAt(idx);
-            }
-            /**
-            orders.RemoveAll(o => o.Id == orderId);
-            */
+            using (var db = new OrderSeviceContext())
+            {
+                db.Orders.Remove(db.Orders.Where(o => o.Id == orderId).FirstOrDefault());
+                db.SaveChanges();
+            } 
         }
 
         //查询所有订单
         public List<Order> QueryAll() {
+            var orders = new List<Order>();
+            using (var db = new OrderSeviceContext())
+            {
+                db.Orders.ToList().ForEach(o => orders.Add(o));
+            }
             return orders;
         }
 

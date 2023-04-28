@@ -9,6 +9,8 @@ namespace OrderFormsDataBase.order {
 
     public Goods Goods { get; set; }
 
+    public int GoodId { get; set; }
+    
     public int Quantity { get; set; }
 
     public float TotalPrice {

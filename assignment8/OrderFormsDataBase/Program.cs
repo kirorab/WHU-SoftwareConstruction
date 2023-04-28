@@ -7,11 +7,11 @@ namespace OrderFormsDataBase
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        static int newOrderId = 0;
+        static int newCustomerId = 0;
+
+        private static void AddOrder()
         {
-            int newOrderId = 0;
-            int newCustomerId = 0;
-            //add orders
             using (var context = new OrderSeviceContext())
             {
                 var order1 = new Order()
@@ -39,6 +39,10 @@ namespace OrderFormsDataBase
                 newCustomerId++;
             }
 
+        }
+        
+        public static void Main(string[] args)
+        {
             using (var context = new OrderSeviceContext())
             {
                 var customer2 = new Customer()

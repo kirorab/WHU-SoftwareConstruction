@@ -14,6 +14,8 @@ namespace OrderFormsDataBase.order {
         public int Id { get; set; }
 
         public Customer Customer { get; set; }
+        
+        public int CustomerId { get; set; }
 
         public DateTime CreateTime { get; set; }
         
