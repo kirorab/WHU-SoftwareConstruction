@@ -25,10 +25,9 @@ namespace Crawler
         
         static void Main(string[] args)
         {
-
             Crawler myCrawler = new Crawler();
             if (args.Length >= 1) startUrl = args[0];
-            myCrawler.urls.Add(startUrl, false);
+            myCrawler.urls.TryAdd(startUrl, false);
             new Thread(myCrawler.Crawl).Start();
             //加入初始页面
             //开始爬行
@@ -59,7 +58,8 @@ namespace Crawler
                 //找到一个还没有下栽过的链接
                 //已经下栽过的， 不再下载
                 Console.WriteLine("爬行于" + current + " 页面！");
-                string html = DownLoad(current); //下栽
+                Task<string> task = Task.Run(() => DownLoad(current));
+                string html = task.Result;
                 urls[current] = true;
                 count++;
                 if (Regex.IsMatch(current, webRef) || count == 1)
@@ -142,7 +142,7 @@ namespace Crawler
                         ('"', '\'', '#', ' ', '>', '"');
                     strRef = ParseRelativeLink(url, strRef);
                     if (strRef.Length == 0) continue;
-                    if (urls[strRef] == null) urls[strRef] = false;
+                    urls.TryAdd(strRef, false);
                 }
             }
         }
